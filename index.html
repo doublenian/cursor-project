@@ -394,62 +394,121 @@
       color: #3d342c;
     }
 
-    .scripts {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
+    .script-intro {
+      margin: 0 0 14px;
     }
 
-    .scripts article {
+    .scripts {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .scripts article,
+    .shared {
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 18px;
       box-shadow: var(--shadow);
-      padding: 16px 16px 18px;
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      padding: 18px 20px 16px;
+    }
+
+    .shared {
+      border-style: dashed;
+      box-shadow: none;
     }
 
     .script-kicker {
       margin: 0;
       color: var(--muted);
       font-size: 12px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
 
-    .scripts h3 {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.45;
+    .script-title {
+      margin: 8px 0 0;
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1.4;
       letter-spacing: -0.02em;
     }
 
-    .script-topic {
-      margin: 0;
-      color: var(--muted);
+    .scripts h3,
+    .shared h3 {
+      margin: 20px 0 8px;
       font-size: 13px;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      color: var(--muted);
     }
 
-    .script-body {
-      margin: auto 0 0;
-      padding-top: 12px;
-      border-top: 1px dashed var(--line);
-      color: var(--fit-ink);
-      font-size: 15px;
+    .shared h3 { margin-top: 0; }
+
+    .hook {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fbf6ee;
     }
 
-    .script-body span {
-      display: block;
+    .hook p,
+    .copy p,
+    .shots p { margin: 0 0 8px; }
+
+    .hook p:last-child,
+    .copy p:last-child,
+    .shots p:last-child { margin-bottom: 0; }
+
+    .spoken {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .cover-lines {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .shots {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .shots > li {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .shot-time {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .shot-label {
+      display: inline-block;
+      min-width: 2.6em;
+      margin-right: 6px;
       color: var(--muted);
       font-size: 12px;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
+      letter-spacing: 0.04em;
     }
+
+    .shots ul,
+    .advice,
+    .shared ul {
+      margin: 4px 0 8px;
+      padding-left: 1.2em;
+    }
+
+    .advice li,
+    .shared li { margin: 0 0 6px; }
+
+    .shared ul { margin-bottom: 0; }
 
     footer {
       margin-top: 28px;
@@ -459,7 +518,6 @@
 
     @media (max-width: 800px) {
       .facts,
-      .scripts,
       .chart-rows,
       .axis {
         grid-template-columns: 1fr;
@@ -566,9 +624,240 @@
     <section aria-labelledby="script-title">
       <div class="section-head">
         <h2 id="script-title">本周三条笔记脚本</h2>
-        <p class="section-note">先占位。标题带上海和场景，正文还没写。这块不随筛选变化。</p>
+        <p class="section-note">建议连发顺序：本颜客返 → 原生感通勤 → 骨相眼妆。不随筛选变化。</p>
       </div>
-      <div class="scripts" id="scripts"></div>
+      <p class="callout script-intro">给毛毛本人出镜拍。人设：肿泡眼、内双、按骨相画。服务：上门试妆、新娘妆、通勤妆。热度观察窗口约 2026-10-15～10-30。数字只采用文末口径，并写明来源。三条都讲过程、客返和眼型；价格、店铺和购买链接不写。标题里的区是建议取景。换成当周真实预约时，标题仍保留「上海」和那个具体房间或出门场景。客户入镜前先拿到出镜同意。原相机全程关滤镜、关美颜。文末口径写在各条发布建议里，没有另找热度，也没有放进排序图。</p>
+      <div class="scripts" id="scripts">
+        <article aria-label="一、本颜出镜（客返原相机）">
+          <p class="script-kicker">01 · 本颜出镜（客返原相机）</p>
+          <h3>标题</h3>
+          <p class="script-title">上海徐汇客户家里窗边｜妆后客返原相机，本颜出镜还是她</p>
+
+          <h3>开头钩子</h3>
+          <div class="hook">
+            <p>前 3 秒先出客户第二天回传的原相机照片，毛毛指着屏幕说：</p>
+            <p class="spoken">「这张是她第二天在公司茶水间回传的。原相机，美颜关着。妆还在，同事叫的还是她的名字。」</p>
+            <p class="cover-lines">封面大字：客返原相机<br>封面小字：上海徐汇窗边 · 本颜出镜</p>
+          </div>
+
+          <h3>分镜</h3>
+          <ol class="shots">
+            <li>
+              <p class="shot-time">0–3 秒｜钩子</p>
+              <p><span class="shot-label">画面</span>手机相册里客返原图占满屏，手指点在眼睛和脸侧。</p>
+              <p><span class="shot-label">字幕</span>上海徐汇 · 第二天回传</p>
+              <p><span class="shot-label">口播</span>用上面的钩子。</p>
+            </li>
+            <li>
+              <p class="shot-time">3–10 秒｜窗边妆前</p>
+              <p><span class="shot-label">画面</span>徐汇客户家客厅，靠窗侧光。客户素颜坐下，毛毛站在侧后方。机位固定，灯不换。</p>
+              <p><span class="shot-label">口播</span>「上门试妆。今天交卷看她自己的原相机，人还得是她。」</p>
+              <p><span class="shot-label">字幕</span>同机位妆前</p>
+            </li>
+            <li>
+              <p class="shot-time">10–22 秒｜只动该动的地方</p>
+              <p><span class="shot-label">画面</span>镜头停在脸和手上。顺着内双把眼褶前半段轻轻打开，眉骨提一点；底妆薄，脸颊留着她自己的肤色；眉毛顺着原来的眉峰。</p>
+              <p><span class="shot-label">口播</span>「肿的地方收一点，眉骨提一点。肤色用她自己的。」</p>
+              <p><span class="shot-label">字幕</span>内双 · 肿泡眼 · 薄底妆</p>
+            </li>
+            <li>
+              <p class="shot-time">22–32 秒｜当场原相机</p>
+              <p><span class="shot-label">画面</span>妆完，客户自己拿手机，后置原相机，窗边同一位置，平视，不找仰角。旁边没有补光灯。</p>
+              <p><span class="shot-label">口播</span>「这张用她的手机，窗边这盏光。」</p>
+              <p><span class="shot-label">字幕</span>客户原相机直出</p>
+            </li>
+            <li>
+              <p class="shot-time">32–45 秒｜三张并排</p>
+              <p><span class="shot-label">画面</span>左妆前、中当场原相机、右第二天客返。三张同比例。毛毛只讲，不再修图。</p>
+              <p><span class="shot-label">口播</span>「中间是试妆结束，右边是第二天回传。三张都是原相机。本颜就是妆可以在，人还是这个人。」</p>
+              <p><span class="shot-label">字幕</span>妆前 / 当场 / 客返</p>
+            </li>
+            <li>
+              <p class="shot-time">45–52 秒｜收到预约</p>
+              <p><span class="shot-label">画面</span>毛毛对镜头，背景仍是那面窗。</p>
+              <p><span class="shot-label">口播</span>「想先看原相机再定日子的，评论里留区域。我按上门试妆约。」</p>
+              <p><span class="shot-label">字幕</span>评论区留区域</p>
+            </li>
+          </ol>
+
+          <h3>正文文案</h3>
+          <div class="copy">
+            <p>上海徐汇，客户家里靠窗。她约上门试妆，最在意的是妆完朋友圈一发，同事还认得出她。</p>
+            <p>所以交卷不在我的相机里。交卷是她自己的原相机，加上第二天从公司茶水间回传的那张。</p>
+            <p>她是内双，眼皮偏肿。眼妆顺着她的眼褶把前半段打开，眉骨轻轻提一点，底妆留着她自己的肤色。窗边侧光最容易看出妆的厚薄，三张都在这盏光里拍。</p>
+            <p>并排是妆前、试妆结束、第二天客返。都是原相机。妆还在，五官的位置还是她的。</p>
+            <p>我自己也是肿泡眼、内双，按骨相画。上门试妆、通勤、新娘，都先看原相机里还认不认得出本人。</p>
+            <p>你在上海哪个区，评论区留区域就行。想看同机位妆前的，也可以说一声，我按眼型再拍一条。</p>
+          </div>
+
+          <h3>发布建议</h3>
+          <ul class="advice">
+            <li>封面用三张原相机并排。大字「客返原相机」，角落「上海徐汇窗边」。主图选光最普通的那张。</li>
+            <li>标签：#上海化妆师 #上门试妆 #本颜 #原相机 #肿泡眼妆容 #内双</li>
+            <li>工作日 12:00–13:30 或 21:00 左右发。客返图和上班的人有对照。</li>
+            <li>置顶评论：「三张都是原相机。你更想看窗边，还是第二天公司那张？」用来定下一条的场景。</li>
+            <li>热度写在发布备注里，不写进正文当自己的成绩。口径：千瓜/网易（约 10/15），#本颜 近 30 天笔记分享增长约 5 倍+，单篇点赞可达 10 万+。</li>
+            <li>拍摄前确认客户同意脸部出镜，以及客返图可以公开。</li>
+          </ul>
+        </article>
+
+        <article aria-label="二、原生感通勤淡妆">
+          <p class="script-kicker">02 · 原生感通勤淡妆</p>
+          <h3>标题</h3>
+          <p class="script-title">上海陆家嘴早八出门前｜上门画一套原生感通勤淡妆</p>
+
+          <h3>开头钩子</h3>
+          <div class="hook">
+            <p>前 3 秒，玄关挂钟和客户手里的工牌同框。毛毛看一眼钟：</p>
+            <p class="spoken">「七点四十她要下楼。二十分钟，画到公司电梯镜里还像今早的她。」</p>
+            <p class="cover-lines">封面大字：早八原生感<br>封面小字：上海陆家嘴出门前 · 上门通勤妆</p>
+          </div>
+
+          <h3>分镜</h3>
+          <ol class="shots">
+            <li>
+              <p class="shot-time">0–3 秒｜钩子</p>
+              <p><span class="shot-label">画面</span>玄关，客户套上外套，工牌挂在包带上。毛毛看挂钟。</p>
+              <p><span class="shot-label">字幕</span>上海陆家嘴 · 出门前 20 分钟</p>
+              <p><span class="shot-label">口播</span>用上面的钩子。</p>
+            </li>
+            <li>
+              <p class="shot-time">3–9 秒｜留家里本来的光</p>
+              <p><span class="shot-label">画面</span>玄关镜或卫生间镜，顶灯关掉，用门口或窗边的自然光。皮肤纹理还在。</p>
+              <p><span class="shot-label">口播</span>「通勤妆先看皮肤还在不在。气色在，脸还是今早那张。」</p>
+              <p><span class="shot-label">字幕</span>关顶灯 · 留肤质</p>
+            </li>
+            <li>
+              <p class="shot-time">9–20 秒｜腮红负责气色</p>
+              <p><span class="shot-label">画面</span>用她梳妆台上平时那块腮红，从眼下扫到面中，颜色接到太阳穴停住。眼尾用同一块颜色带一下。手停在脸上，不切到货架。</p>
+              <p><span class="shot-label">口播</span>「早八最有用的是腮红的位置。眼下一点，面中一点，人就醒了。眼尾用同一块颜色，少加一个新色。」</p>
+              <p><span class="shot-label">字幕</span>腮红提到眼下</p>
+            </li>
+            <li>
+              <p class="shot-time">20–30 秒｜眼睛按肿泡眼收</p>
+              <p><span class="shot-label">画面</span>内双只强调眼褶后半段，睫毛夹一下，涂她包里那支睫毛膏。</p>
+              <p><span class="shot-label">口播</span>「她是肿泡眼、内双。眼皮前半段保持浅，眼褶后半段再上色。电梯灯一照，前半段太深会更肿。」</p>
+              <p><span class="shot-label">字幕</span>内双后半段</p>
+            </li>
+            <li>
+              <p class="shot-time">30–40 秒｜两面镜子交卷</p>
+              <p><span class="shot-label">画面</span>客户看玄关小镜，再看毛毛手机里的原相机。她拿包出门，电梯门反光里给一个侧脸。</p>
+              <p><span class="shot-label">口播</span>「交卷看玄关镜，再看电梯门。到工位不用再补一层。」</p>
+              <p><span class="shot-label">字幕</span>玄关镜交卷</p>
+            </li>
+            <li>
+              <p class="shot-time">40–48 秒｜收到出门时间</p>
+              <p><span class="shot-label">画面</span>人走后，毛毛在空玄关对镜头。</p>
+              <p><span class="shot-label">口播</span>「陆家嘴、前滩、静安，早八能上门的工作日，评论区留你出门的时间。」</p>
+              <p><span class="shot-label">字幕</span>评论区留下门时间</p>
+            </li>
+          </ol>
+
+          <h3>正文文案</h3>
+          <div class="copy">
+            <p>上海陆家嘴，客户工作日早八。工牌放在玄关，给我二十分钟。她要到公司还像自己，同事看不出专门画过。</p>
+            <p>顶灯关掉，用家里本来的光。底妆只补会出油、会发暗的位置，脸颊的纹理留下。气色靠腮红，从眼下扫到面中，眼尾用同一块颜色带一下。一个颜色走到两个位置，早八来得及。</p>
+            <p>她是肿泡眼、内双。眼妆走眼褶后半段，睫毛用她包里那支。眼皮前半段保持浅，写字楼电梯灯才不会把肿照出来。</p>
+            <p>交卷看两面：玄关镜，和下楼时电梯门上的反光。两面都还是她。</p>
+            <p>梳妆台上顺手的腮红就够。这篇讲位置和出门前怎么交卷。</p>
+            <p>上门通勤妆、试妆都可以约。评论区留下门时间和区域，我看档期回。</p>
+          </div>
+
+          <h3>发布建议</h3>
+          <ul class="advice">
+            <li>封面用玄关镜里的原相机侧脸。大字「早八原生感」，小字「上海陆家嘴出门前」。工牌和挂钟入画，场景能认出来。</li>
+            <li>标签：#上海化妆师 #通勤妆 #原生感妆容 #上门化妆 #早八妆 #腮红</li>
+            <li>周日晚上或周一早上发，对着「下一周早八」的预约。置顶评论：「出门前能留几分钟？10 / 20 / 30。」</li>
+            <li>热度口径：双11彩香指南（约 10/18），多用盘搜索同比约 +63%，腮红约 +40%。正文落到「腮红的位置」和「同一块颜色带到眼尾」。价格、店铺和购买链接不写。产品若入画，口播不念品牌。</li>
+          </ul>
+        </article>
+
+        <article aria-label="三、骨相 / 肿泡眼眼妆">
+          <p class="script-kicker">03 · 骨相 / 肿泡眼眼妆</p>
+          <h3>标题</h3>
+          <p class="script-title">上海静安上门新娘试妆｜肿泡眼内双按骨相画的眼妆</p>
+
+          <h3>开头钩子</h3>
+          <div class="hook">
+            <p>前 3 秒，毛毛的手指停在客户眉骨上，笔还扣着盖：</p>
+            <p class="spoken">「试妆先看眉骨、眼窝和脸颊这条线。她是肿泡眼、内双，眼线排在后面。」</p>
+            <p class="cover-lines">封面大字：先看骨相再画眼<br>封面小字：上海静安 · 上门新娘试妆</p>
+          </div>
+
+          <h3>分镜</h3>
+          <ol class="shots">
+            <li>
+              <p class="shot-time">0–3 秒｜钩子</p>
+              <p><span class="shot-label">画面</span>静安客户家，化妆镜侧方。手指点眉骨和眼窝，笔盖还在。</p>
+              <p><span class="shot-label">字幕</span>上海静安 · 新娘试妆</p>
+              <p><span class="shot-label">口播</span>用上面的钩子。</p>
+            </li>
+            <li>
+              <p class="shot-time">3–12 秒｜用自己的眼睛对照</p>
+              <p><span class="shot-label">画面</span>毛毛对镜，指自己的肿泡眼和内双，再切到客户同一角度。</p>
+              <p><span class="shot-label">口播</span>「我自己也是这种眼睛。肿在前半段，褶在里面。画的时候跟骨相走。」</p>
+              <p><span class="shot-label">字幕</span>同款眼型 · 先看骨相</p>
+            </li>
+            <li>
+              <p class="shot-time">12–26 秒｜三步</p>
+              <p><span class="shot-label">画面</span>每步约 4 秒，步骤特写用毛毛自己的眼睛，客户出完成的那只：</p>
+              <ul>
+                <li>眉骨和眼窝交界提亮，肿的区域保持浅。</li>
+                <li>颜色压在眼褶后半段和外眼角，内眼角留亮。</li>
+                <li>眼线顺着内双睁开时真实的那条褶走，眼尾上挑一点。卧蚕贴着下眼睑毛根点一点高光。</li>
+              </ul>
+              <p><span class="shot-label">口播</span>「提眉骨，颜色让到后半段，眼线跟着她真实睁开的褶。卧蚕贴着毛根，是一点光。」</p>
+              <p><span class="shot-label">字幕</span>提眉骨｜颜色靠后｜眼线跟褶</p>
+            </li>
+            <li>
+              <p class="shot-time">26–38 秒｜三盏光</p>
+              <p><span class="shot-label">画面</span>客户完成的那只眼睛，依次过家里暖色顶灯、窗边自然光、手机前置（宾客会这么拍）。每盏停约 3 秒，妆不换。</p>
+              <p><span class="shot-label">口播</span>「婚礼当天不止一盏灯。试妆要过暖光、窗边，还有宾客的前置摄像头。」</p>
+              <p><span class="shot-label">字幕</span>暖光 / 窗边 / 前置</p>
+            </li>
+            <li>
+              <p class="shot-time">38–48 秒｜颜色放在哪</p>
+              <p><span class="shot-label">画面</span>毛毛自己的眼睛特写，手指从眼皮前半段移到后半段，示意颜色让开肿处、落在后半段。切回客户窗边的完成妆。</p>
+              <p><span class="shot-label">口播</span>「颜色让开肿的地方，落在眼褶后半段。新娘照里，眼睛还是她的。」</p>
+              <p><span class="shot-label">字幕</span>颜色让开肿处</p>
+            </li>
+            <li>
+              <p class="shot-time">48–56 秒｜收到眼型</p>
+              <p><span class="shot-label">画面</span>客户看向窗外，毛毛在侧后方。</p>
+              <p><span class="shot-label">口播</span>「眼型接近肿泡眼、内双的，评论区留你的眼型。新娘试妆和日常眼妆，我都按骨相约。」</p>
+              <p><span class="shot-label">字幕</span>评论区留眼型</p>
+            </li>
+          </ol>
+
+          <h3>正文文案</h3>
+          <div class="copy">
+            <p>上海静安，上门新娘试妆。客户一坐下就说，拍照时眼睛总是肿的，画完更找不到自己的眼睛。</p>
+            <p>她是肿泡眼、内双。我自己也是。这种眼睛先看骨相：眉骨高不高，眼窝深不深，脸颊的线往哪边走。眼线笔后拿。</p>
+            <p>眼妆三步。眉骨和眼窝交界提亮，肿的地方保持浅。颜色压在眼褶后半段和外眼角，内眼角留亮。眼线顺着她睁开时真实的那条褶走，眼尾轻轻上挑。卧蚕贴着下眼睑毛根点一点高光。</p>
+            <p>试妆连看三盏光：家里的暖顶灯、窗边自然光、宾客会用的手机前置。三盏下面都还是她的眼睛，这场才算过。</p>
+            <p>骨相和肿泡眼眼妆，近两周未见单独热搜名次。千瓜口径是持续高需求。未见公开量化。方法按眼型留在主页，按预约来拍。</p>
+            <p>你要是也是肿泡眼或内双，评论区留眼型。上海上门新娘试妆、日常眼妆，都可以按这个约。</p>
+          </div>
+
+          <h3>发布建议</h3>
+          <ul class="advice">
+            <li>封面用毛毛自己的眼部步骤，或客户窗边的完成眼妆。大字「先看骨相再画眼」，小字「上海静安新娘试妆」。客户未同意出镜时，全程用毛毛自己的眼睛讲，标题里的静安上门场景保留，正文改成「按静安新娘试妆的流程，用我自己的眼睛演示」。</li>
+            <li>标签：#上海化妆师 #新娘试妆 #肿泡眼 #内双眼妆 #骨相妆 #上门化妆</li>
+            <li>周末上午发，方便收藏。置顶评论：「你的眼睛更接近肿泡眼，还是内双里褶很深？」下一条按留言多的眼型拍。</li>
+            <li>热度口径：近两周未见单独热搜名次；千瓜口径为持续高需求。未见公开量化。正文保持这句。点赞、搜索、名次都不估。</li>
+            <li>步骤讲清楚即可。品牌眼影盘、假睫毛套装和购买链接不放。</li>
+          </ul>
+        </article>
+
+        <aside class="shared" aria-label="三条共用">
+          <h3>三条共用</h3>
+          <ul>
+            <li>毛毛先出镜，点明自己是肿泡眼、内双、按骨相画。三条文案用同一句人设。</li>
+            <li>原相机、关美颜。并排时字幕写明机位和光线。</li>
+            <li>评论区收区域、出门时间、眼型，用来约上门试妆、通勤妆、新娘试妆。</li>
+          </ul>
+        </aside>
+      </div>
     </section>
 
     <footer>
@@ -663,27 +952,6 @@
         heat: "Neodrop 10/12–18：该方向升至小红书行业热词第2（产品热词）",
         fit: "不太贴",
         advice: "最多妆前护肤一句",
-      },
-    ];
-
-    const SCRIPTS = [
-      {
-        index: "01",
-        rank: 2,
-        topic: "「本颜出镜」/原相机无滤镜",
-        title: "上海客户家里｜原相机直出，妆前妆后她自己拍",
-      },
-      {
-        index: "02",
-        rank: 7,
-        topic: "千金妆/淡颜清冷妆/轻烟熏",
-        title: "上海外滩夜景｜千金淡颜清冷妆，出门前一小时",
-      },
-      {
-        index: "03",
-        rank: 8,
-        topic: "新中式/中式妆造",
-        title: "上海订婚午宴｜新中式旗袍妆，到府跟妆",
       },
     ];
 
@@ -793,18 +1061,6 @@
       const n = countOf(button.dataset.fit);
       button.querySelector("[data-count]").textContent = String(n);
       button.addEventListener("click", () => render(button.dataset.fit));
-    });
-
-    const scriptRoot = document.querySelector("#scripts");
-    SCRIPTS.forEach((script) => {
-      const article = document.createElement("article");
-      const kicker = el("p", "script-kicker", `占位 ${script.index} · 选题 ${script.rank}`);
-      const title = el("h3", "", script.title);
-      const topic = el("p", "script-topic", script.topic);
-      const body = el("p", "script-body");
-      body.append(el("span", "", "正文"), document.createTextNode("脚本撰写中"));
-      article.append(kicker, title, topic, body);
-      scriptRoot.append(article);
     });
 
     render("全部");
