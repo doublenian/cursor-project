@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小红书美妆热点前十 · 毛毛</title>
+  <meta name="description" content="上海上门化妆师毛毛的小红书美妆热点前十看板。条形图表示排序权重，不把不同口径的热度画在同一根轴上。">
+  <style>
+    :root {
+      --bg: #f3efe6;
+      --paper: #fffdf8;
+      --ink: #241c17;
+      --muted: #6d645c;
+      --line: #e3d9cc;
+      --fit: #c23b4e;
+      --fit-ink: #8d2434;
+      --fit-soft: #f8e4e7;
+      --mid: #b6842e;
+      --mid-ink: #6e4e12;
+      --mid-soft: #f6edd6;
+      --far: #7d7872;
+      --far-ink: #3f3b37;
+      --far-soft: #eceae6;
+      --track: #efe6d8;
+      --shadow: 0 16px 40px rgba(60, 36, 18, 0.06);
+      --sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", "WenQuanYi Micro Hei", "Droid Sans Fallback", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 480px at 10% -10%, rgba(194, 59, 78, 0.08), transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding-bottom: 72px;
+    }
+
+    header.hero {
+      padding: 48px 0 12px;
+    }
+
+    .eyebrow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: center;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .seal {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: var(--fit);
+      color: white;
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 680;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .who {
+      margin: 10px 0 0;
+      font-size: 18px;
+    }
+
+    .lede {
+      max-width: 46rem;
+      margin: 16px 0 0;
+      color: var(--muted);
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+      padding: 0;
+    }
+
+    .facts div {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .facts dt {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    .facts dd {
+      margin: 4px 0 0;
+      font-size: 15px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+      padding: 12px 0;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .segment {
+      display: inline-flex;
+      padding: 4px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      gap: 2px;
+    }
+
+    .segment button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .segment button[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fffdf8;
+    }
+
+    .segment button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--fit);
+      outline-offset: 2px;
+    }
+
+    #filter-status {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 8px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin: 12px 0 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p,
+    .section-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px 18px 14px;
+    }
+
+    .callout {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fbf6ee;
+      border: 1px dashed #ddc9a4;
+      color: #5c4a32;
+      font-size: 14px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin: 0 0 14px;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend li {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    .swatch.fit { background: var(--fit); }
+    .swatch.mid { background: var(--mid); }
+    .swatch.far { background: var(--far); }
+
+    .chart-rows,
+    .axis {
+      display: grid;
+      grid-template-columns: 22rem minmax(0, 1fr) 7.6rem;
+      column-gap: 14px;
+      align-items: center;
+    }
+
+    .bar-row {
+      display: contents;
+    }
+
+    .bar-label {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      min-width: 0;
+      padding: 8px 0;
+    }
+
+    .rank {
+      flex: none;
+      width: 1.6rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+    }
+
+    .name {
+      font-size: 14.5px;
+      line-height: 1.4;
+    }
+
+    .track {
+      height: 14px;
+      background: var(--track);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: inherit;
+      width: 0;
+      transition: width 360ms ease;
+    }
+
+    .bar.fit { background: var(--fit); }
+    .bar.mid { background: var(--mid); }
+    .bar.far { background: var(--far); }
+
+    .bar-meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .weight {
+      font-variant-numeric: tabular-nums;
+      font-weight: 680;
+      font-size: 15px;
+    }
+
+    .weight.fit { color: var(--fit-ink); }
+    .weight.mid { color: var(--mid-ink); }
+    .weight.far { color: var(--far-ink); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3.4rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .pill.fit { background: var(--fit-soft); color: var(--fit-ink); }
+    .pill.mid { background: var(--mid-soft); color: var(--mid-ink); }
+    .pill.far { background: var(--far-soft); color: var(--far-ink); }
+
+    .axis {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ticks {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .axis-name {
+      text-align: right;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+    }
+
+    caption {
+      caption-side: bottom;
+      padding: 10px 16px 14px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    th {
+      font-size: 12px;
+      font-weight: 640;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      background: #fbf7f1;
+    }
+
+    tbody tr:last-child td { border-bottom: 0; }
+
+    td.num, th.num {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    tr[data-fit="适合"] td.num { box-shadow: inset 3px 0 0 var(--fit); }
+    tr[data-fit="一般"] td.num { box-shadow: inset 3px 0 0 var(--mid); }
+    tr[data-fit="不太贴"] td.num { box-shadow: inset 3px 0 0 var(--far); }
+
+    .heat {
+      color: #3d342c;
+    }
+
+    .scripts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .scripts article {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 16px 16px 18px;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .script-kicker {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .scripts h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+    }
+
+    .script-topic {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .script-body {
+      margin: auto 0 0;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+      color: var(--fit-ink);
+      font-size: 15px;
+    }
+
+    .script-body span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .facts,
+      .scripts,
+      .chart-rows,
+      .axis {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "label meta"
+          "track track";
+        column-gap: 10px;
+        padding: 8px 0 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .bar-label { grid-area: label; padding: 0; }
+      .track { grid-area: track; margin-top: 8px; }
+      .bar-meta { grid-area: meta; }
+      .axis { display: none; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow"><span class="seal">妆</span> 小红书 · 美妆选题看板</p>
+      <h1>美妆热点前十</h1>
+      <p class="who">上海上门化妆师 · 毛毛</p>
+      <p class="lede">观察窗口约 2026-10-15～10-30。十条选题按给定名次原样排列，热度线索保留各自口径，没有换算成同一个指标，也没有另找数据。</p>
+      <dl class="facts">
+        <div>
+          <dt>账号</dt>
+          <dd>毛毛 · 上海上门化妆</dd>
+        </div>
+        <div>
+          <dt>窗口</dt>
+          <dd>约 2026-10-15～10-30</dd>
+        </div>
+        <div>
+          <dt>条形图读法</dt>
+          <dd>长度是排序权重，颜色是适合度</dd>
+        </div>
+      </dl>
+    </header>
+
+    <div class="toolbar">
+      <div class="segment" role="group" aria-label="适合度筛选">
+        <button type="button" data-fit="全部" aria-pressed="true">全部 <span data-count="全部"></span></button>
+        <button type="button" data-fit="适合" aria-pressed="false">适合 <span data-count="适合"></span></button>
+        <button type="button" data-fit="一般" aria-pressed="false">一般 <span data-count="一般"></span></button>
+        <button type="button" data-fit="不太贴" aria-pressed="false">不太贴 <span data-count="不太贴"></span></button>
+      </div>
+      <p id="filter-status" role="status"></p>
+    </div>
+
+    <section aria-labelledby="chart-title">
+      <div class="section-head">
+        <h2 id="chart-title">排序权重</h2>
+        <p>第 1 名 = 10，第 10 名 = 1。筛选只隐藏条目，不把剩下的条重新拉满。</p>
+      </div>
+      <div class="panel">
+        <p class="callout">热度没有同一单位：点赞、搜索同比、热词名次、成交价格、话题转述不能画在一根热度轴上。下面的横条只表示名次权重，颜色只表示这条选题对毛毛这个上门化妆账号的适合度。</p>
+        <ul class="legend">
+          <li><i class="swatch fit" aria-hidden="true"></i>适合</li>
+          <li><i class="swatch mid" aria-hidden="true"></i>一般</li>
+          <li><i class="swatch far" aria-hidden="true"></i>不太贴</li>
+          <li>横轴：排序权重 0–10</li>
+        </ul>
+        <div id="chart" class="chart-rows" role="list" aria-label="按名次排列的排序权重，条长不是热度"></div>
+        <div class="axis" aria-hidden="true">
+          <span></span>
+          <div class="ticks"><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span></div>
+          <span class="axis-name">排序权重</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="table-title">
+      <div class="section-head">
+        <h2 id="table-title">十条选题</h2>
+        <p class="section-note">跟上面同一个筛选。热度线索按原句列出。</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <caption>线索里的日期和口径按原句保留，包括落在窗口边缘的 10/12–18。第 9、10 条种子没有单列「是什么」，表内按名称转写，没有补新的热度。</caption>
+          <thead>
+            <tr>
+              <th class="num" scope="col">名次</th>
+              <th scope="col">名称</th>
+              <th scope="col">是什么</th>
+              <th scope="col">热度线索</th>
+              <th scope="col">适合度</th>
+              <th scope="col">给账号的建议</th>
+            </tr>
+          </thead>
+          <tbody id="topic-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="script-title">
+      <div class="section-head">
+        <h2 id="script-title">本周三条笔记脚本</h2>
+        <p class="section-note">先占位。标题带上海和场景，正文还没写。这块不随筛选变化。</p>
+      </div>
+      <div class="scripts" id="scripts"></div>
+    </section>
+
+    <footer>
+      <p>种子数据原样收录，页面没有把不同热度换成同一把尺子。条形图的数字是排序权重：权重 = 11 − 名次。</p>
+    </footer>
+  </div>
+
+  <script>
+    const FIT_CLASS = {
+      "适合": "fit",
+      "一般": "mid",
+      "不太贴": "far",
+    };
+
+    const TOPICS = [
+      {
+        rank: 1,
+        name: "万圣节/影视角色仿妆",
+        what: "节庆仿妆教程",
+        heat: "Neodrop 10/19–25 小红书样本点赞前三被此类包揽；微信「妆容」指数 10/23 单日涨约 22.2%",
+        fit: "一般",
+        advice: "可蹭节庆眼妆，离上门试妆主业较远",
+      },
+      {
+        rank: 2,
+        name: "「本颜出镜」/原相机无滤镜",
+        what: "不修图真实出镜",
+        heat: "千瓜/网易约10/15：#本颜 近30天笔记分享增长约5倍+，单篇点赞可达10万+",
+        fit: "适合",
+        advice: "客返原相机直出、妆前妆后对比",
+      },
+      {
+        rank: 3,
+        name: "原生感妆容/雀斑妆/「适我化」",
+        what: "少修饰、保留肤质",
+        heat: "双11彩香指南约10/18：多用盘搜索同比约+63%，腮红约+40%",
+        fit: "适合",
+        advice: "通勤淡妆、伪素颜",
+      },
+      {
+        rank: 4,
+        name: "「不挑皮」粉底/底妆肤质适配",
+        what: "换肤质换天气也服帖",
+        heat: "Neodrop 10/12–18：玫珂菲「好粉底不挑皮」进小红书行业热词前25",
+        fit: "适合",
+        advice: "试妆讲底妆、持妆、油皮干皮",
+      },
+      {
+        rank: 5,
+        name: "平价粉底液成交热",
+        what: "约59元档粉底液",
+        heat: "Neodrop 10/19–25：抖音美妆成交第一由约58.92元粉底液拿走",
+        fit: "一般",
+        advice: "可讲客户自带底妆怎么搭，不做纯带货",
+      },
+      {
+        rank: 6,
+        name: "骨相修容/单眼皮·肿泡眼",
+        what: "按骨相与眼型改妆",
+        heat: "近两周未见单独热搜；千瓜口径为持续高需求",
+        fit: "适合",
+        advice: "最贴肿泡眼/内双/骨相人设",
+      },
+      {
+        rank: 7,
+        name: "千金妆/淡颜清冷妆/轻烟熏",
+        what: "秋冬人设妆",
+        heat: "千瓜2026上半年热搜曾列相关词；近1–2周未见公开量化",
+        fit: "适合",
+        advice: "现有千金妆加上海+场景标题",
+      },
+      {
+        rank: 8,
+        name: "新中式/中式妆造",
+        what: "旗袍国风妆发",
+        heat: "约60天「中式辣感」话题热度超8300万的转述；近两周独占量化不足",
+        fit: "适合",
+        advice: "新娘/订婚/新中式跟妆",
+      },
+      {
+        rank: 9,
+        name: "情绪香/疗愈香/工位香",
+        what: "情绪香、疗愈香、工位香",
+        heat: "双11彩香指南：情绪香搜索+238%，疗愈香+371%，工位香+156%",
+        fit: "不太贴",
+        advice: "化妆师账号一带而过",
+      },
+      {
+        rank: 10,
+        name: "海蓝之谜等修护护肤",
+        what: "修护护肤（海蓝之谜等）",
+        heat: "Neodrop 10/12–18：该方向升至小红书行业热词第2（产品热词）",
+        fit: "不太贴",
+        advice: "最多妆前护肤一句",
+      },
+    ];
+
+    const SCRIPTS = [
+      {
+        index: "01",
+        rank: 2,
+        topic: "「本颜出镜」/原相机无滤镜",
+        title: "上海客户家里｜原相机直出，妆前妆后她自己拍",
+      },
+      {
+        index: "02",
+        rank: 7,
+        topic: "千金妆/淡颜清冷妆/轻烟熏",
+        title: "上海外滩夜景｜千金淡颜清冷妆，出门前一小时",
+      },
+      {
+        index: "03",
+        rank: 8,
+        topic: "新中式/中式妆造",
+        title: "上海订婚午宴｜新中式旗袍妆，到府跟妆",
+      },
+    ];
+
+    const chart = document.querySelector("#chart");
+    const tbody = document.querySelector("#topic-body");
+    const statusEl = document.querySelector("#filter-status");
+    const buttons = [...document.querySelectorAll(".segment button")];
+    let current = "全部";
+
+    function weightOf(rank) {
+      return 11 - rank;
+    }
+
+    function countOf(fit) {
+      if (fit === "全部") return TOPICS.length;
+      return TOPICS.filter((topic) => topic.fit === fit).length;
+    }
+
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = text;
+      return node;
+    }
+
+    function renderChart(rows) {
+      chart.replaceChildren();
+      rows.forEach((topic) => {
+        const weight = weightOf(topic.rank);
+        const tone = FIT_CLASS[topic.fit];
+        const row = el("div", "bar-row");
+        row.setAttribute("role", "listitem");
+        row.dataset.rank = String(topic.rank);
+        row.setAttribute(
+          "aria-label",
+          `第${topic.rank}名 ${topic.name}，排序权重 ${weight}，适合度${topic.fit}`,
+        );
+
+        const label = el("div", "bar-label");
+        label.append(
+          el("span", "rank", String(topic.rank).padStart(2, "0")),
+          el("span", "name", topic.name),
+        );
+
+        const track = el("div", "track");
+        track.setAttribute("aria-hidden", "true");
+        const bar = el("div", `bar ${tone}`);
+        bar.style.width = `${weight * 10}%`;
+        bar.dataset.weight = String(weight);
+        bar.dataset.fit = topic.fit;
+        bar.title = `排序权重 ${weight}（第 ${topic.rank} 名）`;
+        track.append(bar);
+
+        const meta = el("div", "bar-meta");
+        meta.append(
+          el("span", `weight ${tone}`, String(weight)),
+          el("span", `pill ${tone}`, topic.fit),
+        );
+
+        row.append(label, track, meta);
+        chart.append(row);
+      });
+    }
+
+    function renderTable(rows) {
+      tbody.replaceChildren();
+      rows.forEach((topic) => {
+        const tr = document.createElement("tr");
+        tr.dataset.fit = topic.fit;
+        tr.dataset.rank = String(topic.rank);
+
+        const cells = [
+          [String(topic.rank), "num"],
+          [topic.name, ""],
+          [topic.what, ""],
+          [topic.heat, "heat"],
+          [topic.fit, ""],
+          [topic.advice, ""],
+        ];
+
+        cells.forEach(([text, className], index) => {
+          const cell = el("td", className, text);
+          if (index === 4) {
+            const pill = el("span", `pill ${FIT_CLASS[topic.fit]}`, topic.fit);
+            cell.textContent = "";
+            cell.append(pill);
+          }
+          tr.append(cell);
+        });
+        tbody.append(tr);
+      });
+    }
+
+    function render(fit) {
+      current = fit;
+      const rows = TOPICS.filter((topic) => fit === "全部" || topic.fit === fit);
+      renderChart(rows);
+      renderTable(rows);
+      buttons.forEach((button) => {
+        button.setAttribute("aria-pressed", button.dataset.fit === fit ? "true" : "false");
+      });
+      const scope = fit === "全部" ? "全部 10 条" : `${rows.length} 条「${fit}」`;
+      statusEl.textContent = `当前显示：${scope}。条长仍是原名次权重，没有在筛选结果里重新拉满。`;
+    }
+
+    buttons.forEach((button) => {
+      const n = countOf(button.dataset.fit);
+      button.querySelector("[data-count]").textContent = String(n);
+      button.addEventListener("click", () => render(button.dataset.fit));
+    });
+
+    const scriptRoot = document.querySelector("#scripts");
+    SCRIPTS.forEach((script) => {
+      const article = document.createElement("article");
+      const kicker = el("p", "script-kicker", `占位 ${script.index} · 选题 ${script.rank}`);
+      const title = el("h3", "", script.title);
+      const topic = el("p", "script-topic", script.topic);
+      const body = el("p", "script-body");
+      body.append(el("span", "", "正文"), document.createTextNode("脚本撰写中"));
+      article.append(kicker, title, topic, body);
+      scriptRoot.append(article);
+    });
+
+    render("全部");
+  </script>
+</body>
+</html>
